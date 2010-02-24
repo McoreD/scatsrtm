@@ -12,7 +12,7 @@ Public Class Form1
         Dim sendbytes() As Byte
 
         'Connect to Central Manager
-        ITSclient.Connect("192.168.30.200", 2012)
+        ITSclient.Connect(txtRemoteIp.Text, 2012)
         If ITSclient.Connected Then
             TextBox1.Text = "Connected to SCATS Central Manager" & NewLine
         End If
@@ -240,4 +240,5 @@ Public Class Form1
 
     End Sub
 
+   
 End Class
