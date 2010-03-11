@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("HistoryFileDumper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Main Roads WA")]
 [assembly: AssemblyProduct("HistoryFileDumper")]
-[assembly: AssemblyCopyright("Copyright 2010")]
+[assembly: AssemblyCopyright("Copyright © 2010 Mike Delpach")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

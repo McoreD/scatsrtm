@@ -18,7 +18,7 @@ namespace HistoryFileDumper
 	/// Description of MainForm.
 	/// </summary>
 	public partial class MainForm : Form
-	{
+	{	
 		public MainForm()
 		{
 			//
@@ -26,30 +26,50 @@ namespace HistoryFileDumper
 			//
 			InitializeComponent();
 			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
-			
 			// Read  location \\dactst30\Program Files (x86)\SCATS6\Region\SCATSData\History
-			//  \\dactst30\SCATSData\History
+			//  			  \\dactst30\SCATSData\History
 			// Write location \\tocuat20\SCATSData
 		}
 				
 		void BtnSyncClick(object sender, EventArgs e)
 		{
-			btnSync.Text = btnSync.Text == "&Start" ? "&Stop" : "&Start";
-			
+			btnSync.Text = btnSync.Text == "&Start" ? "&Stop" : "&Start";				
+			tmrApp.Enabled = !tmrApp.Enabled;
 		}
 		
 		void CopyFiles()
 		{
-			string src = txtSourceDir.Text; 
-			string dest = txtDestDir.Text;
-			if (Directory.Exists(src) && Directory.Exists(dest)) 
+			string srcDir = txtSourceDir.Text; 
+			string destDir = txtDestDir.Text;			
+			if (Directory.Exists(srcDir) && Directory.Exists(destDir)) 
 			{
-				string[] files = Directory.GetFiles(src, "*.hist", SearchOption.AllDirectories); 
-				
+				string[] files = Directory.GetFiles(srcDir, "*.hist", SearchOption.AllDirectories); 
+				foreach (string file in files)
+				{
+					string destFileName = Path.GetFileName(file);
+					string destFilePath = Path.Combine(destDir, destFileName);
+					File.Copy(file, destFilePath, true);
+				}
 			}
+		}
+		
+		void TmrAppTick(object sender, EventArgs e)
+		{
+			if (!bwApp.IsBusy) 
+			{
+				bwApp.RunWorkerAsync();
+			}
+		}
+		
+		void BwAppDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		{
+			CopyFiles();							
+		}
+		
+		
+		void nudFreqValueChanged(object sender, EventArgs e)
+		{
+			tmrApp.Interval = 1000 * (int)nudFreq.Value;
 		}
 	}
 }
