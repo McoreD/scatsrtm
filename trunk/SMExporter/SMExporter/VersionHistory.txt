@@ -1,0 +1,29 @@
+2.0.0.0 Application rewritten using Visual C# 
+
+Version 1.0.2 - 20070601
+
+1.0.2.2 Phase Number was modified to Phase ID that stores string values
+1.0.2.1 Congestion Ratio was very high as the dynamic SaturationFlow was low due to DS not treated as a percentage
+1.0.2.0 Added SaturationFlow and Capacity properties to Lane class
+1.0.1.0 Version History is now embedded in the application
+
+Version 1.0.0 - 20070215
+
+1.0.0.1 Fixed saturation flow 1800 is now dynamic depending on DS
+1.0.0.0 Redesigned GUI to simplify exporting process to both Plain Text and Database
+0.9.0.1 Exporting the Plain Text during batch process created multiple headings
+0.9.0.0 Plain Text export will now include unfiltered data
+0.8.1.0 Removed GUI controls that find average veh/lane/hour
+0.8.0.0 Batch process Strategic Monitor files in a directory
+0.7.1.0 Reduced exporting to database process into one button click
+0.7.0.0 Office Access Database will be automatically created in the file path browsed
+0.6.2.0 Disable Open button while SM file is being parsed
+0.6.1.0 Code improved to handle large SM files 
+0.6.0.1 Cycle Length Actual was same as Cycle Length Nominal if offset was less than 10
+0.6.0.0 Calculate Congestion ratio based on Capacity
+0.5.0.0 Extract ADS and Phase Data
+0.4.0.0 Extract Nominal Extract Cycle Length and Actual Cycle Length
+0.3.1.0 Extract Day and Date 
+0.3.0.0 Added Background Worker
+0.2.0.0 Extract the SM data to Access Database
+0.1.0.0 Initial version exporting SM data (VO, VK, GT, CL) to Text File
