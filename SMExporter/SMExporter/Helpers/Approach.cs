@@ -7,7 +7,7 @@ namespace SMExporter
 {
     public class Approach
     {
-        public int PhaseId { get; set; }
+        public string PhaseId { get; set; }
         public int PhaseTime { get; set; }
         public int Intersection { get; set; }
         public List<Lane> Lanes { get; set; }

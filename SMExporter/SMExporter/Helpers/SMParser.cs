@@ -8,6 +8,30 @@ using System.Text.RegularExpressions;
 namespace SMExporter
 {
 
+    public class SMHeaderLine
+    {
+        /// <summary>
+        /// 24-hour format e.g. 16:00
+        /// </summary>
+        public string Time { get; private set; }
+        /// <summary>
+        /// Sunday, Monday, ..., Saturday
+        /// </summary>
+        public string DayRead { get; private set; }
+        /// <summary>
+        /// 06-September-2006
+        /// </summary>
+        public string DateRead { get; private set; }
+
+        // Wednesday 06-September-2006 16:00 SS  55   PL 1.3  PV   1.4 CL   60 +0 RL  60' SA 57  DS 107
+        // Sunday 28-March-2010 17:29 SS  16F   PL 1.1  PVs1.3 CT   50 +0 RL 50  SA 0   DS 0
+
+        public SMHeaderLine(string line)
+        {
+
+        }
+    }
+
     public class SMParser
     {
         private string mFilePath = string.Empty;
@@ -30,7 +54,7 @@ namespace SMExporter
 
             // int countReadings = 0;
             string prevLine = "";
-            Reading currRead = default(Reading);
+            Reading currRead = new Reading();
             int readID = 0;
 
             using (StreamReader tempSr = new StreamReader(mFilePath))
@@ -41,7 +65,6 @@ namespace SMExporter
 
             while (!sr.EndOfStream)
             {
-
                 currLine = sr.ReadLine();
 
                 Adapter.CurrentValue += 1;
@@ -49,7 +72,6 @@ namespace SMExporter
 
                 if (currLine != null && currLine.Length > 0)
                 {
-
                     currRead = new Reading();
 
                     // this sub ensures that headings are read only if there are 
@@ -64,6 +86,8 @@ namespace SMExporter
                         fixedLine = fixedLine.Replace("'", " ");
                         fixedLine = fixedLine.Replace("''", " ");
                         fixedLine = fixedLine.Replace("  ", " ").Replace("  ", " ");
+                        fixedLine = fixedLine.Replace("PV", "PV "); // sometimes u get values like PVs1.3
+                        fixedLine = RemoveDoubleSpaces(fixedLine);
 
                         string[] arrLine = Regex.Split(fixedLine, " ");
                         currRead.DayRead = arrLine[0].ToString();
@@ -71,9 +95,7 @@ namespace SMExporter
                         currRead.Time = arrLine[2].ToString();
 
                         currRead.PlansActive = arrLine[6];
-                        double plansVoted = 0.0;
-                        Double.TryParse(arrLine[8], out plansVoted);
-                        currRead.PlansVoted = plansVoted;
+                        currRead.PlansVoted = arrLine[8];
 
                         string cl = arrLine[10].Trim();
                         int clN = 0;
@@ -172,9 +194,8 @@ namespace SMExporter
                             int.TryParse(Regex.Split(fixValues[0], " ")[1], out temp1);
                             int.TryParse(Regex.Split(fixValues[0], " ")[2], out temp2);
                             approach.SAorLK = Regex.Split(fixValues[0], " ")[1] + Regex.Split(fixValues[0], " ")[2];
-                            int temp3, temp4 = 0;
-                            int.TryParse(Regex.Split(fixValues[0], " ")[3], out temp3);
-                            approach.PhaseId = temp3;
+                            approach.PhaseId = Regex.Split(fixValues[0], " ")[3];
+                            int temp4 = 0;
                             int.TryParse(Regex.Split(fixValues[0], " ")[4], out temp4);
                             approach.PhaseTime = temp4;
                             if (Program.IsNumeric(fixValues[fixValues.Length - 1]))
@@ -244,10 +265,9 @@ namespace SMExporter
                                     lane.Capacity = lane.MaxFlow * approach.PhaseTime / myListReadings[readID - 1].CycleLengthActual;
                                 }
 
-                                if (lane.DS > 0 | lane.VO > 0 | lane.VK > 0)
+                                if (lane.DS > 0 || lane.VO > 0 || lane.VK > 0 || approach.PhaseTime > 0)
                                 {
                                     approach.Lanes.Add(lane);
-
                                 }
 
                             }
@@ -259,7 +279,7 @@ namespace SMExporter
                     else if (fIsPhaseDataLine(currLine))
                     {
 
-                        string[] phases = Regex.Split(Regex.Replace(currLine, "  ", " "), " "); 
+                        string[] phases = Regex.Split(Regex.Replace(currLine, "  ", " "), " ");
                         if (phases.Length > 0)
                         {
                             myListReadings[readID - 1].PhaseA = phases[0].Replace("A=", "").Trim();
@@ -301,6 +321,15 @@ namespace SMExporter
             sr.Close();
 
             return myListReadings;
+        }
+
+        private static string RemoveDoubleSpaces(string line)
+        {
+            while (line.IndexOf("  ") != -1)
+            {
+                line = line.Replace("  ", " ");
+            }
+            return line;
         }
 
         private bool fIsPhaseDataLine(string line)
