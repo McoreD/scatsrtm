@@ -219,6 +219,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.GroupBox3);
             this.Controls.Add(this.groupBox2);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 200);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

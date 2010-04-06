@@ -1,3 +1,5 @@
+2.0.0.2 Allow non numeric Phase ID values to be stored
+2.0.0.1 Fix for crashing on Plans Voted values such as s1.3
 2.0.0.0 Application rewritten using Visual C# 
 
 Version 1.0.2 - 20070601

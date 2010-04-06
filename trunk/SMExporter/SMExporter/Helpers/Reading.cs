@@ -9,7 +9,7 @@ namespace SMExporter
     {
 
         public List<Approach> Approaches { get; set; }
-        public double PlansVoted { get; set; }
+        public string PlansVoted { get; set; }
         public int CycleLengthNominal { get; set; }
         public int CycleLengthActual { get; set; }
         public int CycleLengthRequired { get; set; }
