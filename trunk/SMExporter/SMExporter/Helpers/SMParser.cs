@@ -85,8 +85,11 @@ namespace SMExporter
                         fixedLine = fixedLine.Replace(" - ", " ");
                         fixedLine = fixedLine.Replace("'", " ");
                         fixedLine = fixedLine.Replace("''", " ");
-                        fixedLine = fixedLine.Replace("  ", " ").Replace("  ", " ");
+                        fixedLine = fixedLine.Replace(",", "");
+                        fixedLine = fixedLine.Replace(" +", "+");
+                        fixedLine = fixedLine.Replace(" -", " ");
                         fixedLine = fixedLine.Replace("PV", "PV "); // sometimes u get values like PVs1.3
+                        fixedLine = fixedLine.Replace("RL", "RL "); // sometimes u get values like PVs1.3
                         fixedLine = RemoveDoubleSpaces(fixedLine);
 
                         string[] arrLine = Regex.Split(fixedLine, " ");
@@ -97,6 +100,7 @@ namespace SMExporter
                         currRead.PlansActive = arrLine[6];
                         currRead.PlansVoted = arrLine[8];
 
+                        // calculating cycle length
                         string cl = arrLine[10].Trim();
                         int clN = 0;
                         int clA = 0;
