@@ -15,6 +15,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace SCATS_Monitor
 {
@@ -156,6 +157,25 @@ namespace SCATS_Monitor
             {
                 this.Text = "SCATS Intersection Monitor - Failed to SCATS Central Manager";
             }
+
+            GetTimeCM();
+        }
+
+        private void GetTimeCM()
+        {
+            byte[] sendbytes = new byte[3];
+
+            sendbytes[0] = 0;
+            sendbytes[1] = 1;
+            sendbytes[2] = 3;
+
+            NetworkStream networkStream = ITSclient.GetStream();
+            networkStream.Write(sendbytes, 0, sendbytes.Length);
+
+            byte[] readBuff = new byte[10];
+            networkStream.Read(readBuff, 0, 10);
+
+            Debug.WriteLine("Central Manager Time:" + Environment.NewLine + readBuff[6] + "/" + readBuff[5] + "/" + (readBuff[4] + 1792) + " Time: " + readBuff[7] + ":" + readBuff[8] + ":" + readBuff[9]);
 
         }
 
