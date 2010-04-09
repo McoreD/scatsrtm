@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("ITSPort")> 
+<Assembly: AssemblyTitle("SCATSMonitor")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("MAIN ROADS Western Australia")> 
-<Assembly: AssemblyProduct("ITSPort")> 
-<Assembly: AssemblyCopyright("Copyright © MAIN ROADS Western Australia 2009")> 
+<Assembly: AssemblyCompany(".")> 
+<Assembly: AssemblyProduct("SCATSMonitor")> 
+<Assembly: AssemblyCopyright("Copyright © . 2010")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("29dd804f-7ca4-488a-b30d-e075a9daad44")> 
+<Assembly: Guid("fb7eed6e-f7fc-48d3-ab35-a80feb452373")> 
 
 ' Version information for an assembly consists of the following four values:
 '

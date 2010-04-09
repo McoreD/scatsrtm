@@ -3,13 +3,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4DC50AE0-F03C-43AD-8CC0-E42581F0010B}</ProjectGuid>
+    <ProjectGuid>{1F0FDAEE-EACB-4761-9946-879DC1CB7DAB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ITSPort.My.MyApplication</StartupObject>
-    <RootNamespace>ITSPort</RootNamespace>
-    <AssemblyName>ITSPort</AssemblyName>
+    <StartupObject>SCATSMonitor.My.MyApplication</StartupObject>
+    <RootNamespace>SCATSMonitor</RootNamespace>
+    <AssemblyName>SCATSMonitor</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -24,7 +24,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ITSPort.xml</DocumentationFile>
+    <DocumentationFile>SCATSMonitor.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -33,7 +33,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ITSPort.xml</DocumentationFile>
+    <DocumentationFile>SCATSMonitor.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -92,6 +92,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
